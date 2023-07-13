@@ -1,0 +1,9 @@
+{
+	"extends": [
+		"@kalimahapps"
+	],
+	"rules": {
+		"complexity": ["warn", 22],
+		"max-depth": ["warn", 4]
+	}
+}

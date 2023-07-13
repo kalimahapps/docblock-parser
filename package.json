@@ -1,0 +1,47 @@
+{
+  "name": "@kalimahapps/docblock-parser",
+  "description": "Line-based docblock parser",
+  "author": "khr2003",
+  "version": "1.0.0",
+  "homepage": "https://github.com/kalimahapps/docblock-parser",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kalimahapps/docblock-parser.git"
+  },
+  "bugs": {
+    "url": "https://github.com/kalimahapps/docblock-parser/issues"
+  },
+  "type": "module",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc && vite build",
+    "build:watch": "tsc && vite build --watch",
+    "check": "vite-node ./src/parser.ts",
+    "coverage": "vitest run --coverage",
+    "coverage:ui": "vite preview --outDir coverage/",
+    "dev": "vite",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "dependencies": {
+    "vitest": "^0.33.0"
+  },
+  "devDependencies": {
+    "@kalimahapps/eslint-config": "^1.1.6",
+    "@vitest/coverage-v8": "^0.33.0",
+    "eslint": "^8.44.0",
+    "typescript": "^5.1.6",
+    "vite": "^4.4.3",
+    "vite-node": "^0.33.0"
+  },
+  "exports": "./dist/index.js",
+  "types": "./src/types.d.ts",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}
