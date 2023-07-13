@@ -3,7 +3,13 @@
 		"@kalimahapps"
 	],
 	"rules": {
-		"complexity": ["warn", 22],
-		"max-depth": ["warn", 4]
+		"complexity": [
+			"warn",
+			23
+		],
+		"max-depth": [
+			"warn",
+			4
+		]
 	}
 }

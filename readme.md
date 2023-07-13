@@ -5,7 +5,7 @@
 </p>
 
 <p align="center">
-Line based docblock parser.
+Line based docblock parser
 </p>
 
 <p align="center">
