@@ -1,11 +1,11 @@
-import type { Ast, TagAst, ValueAst } from './types';
+import type { DocblockTagValue, Docblock, DocblockTag } from './types';
 
 class Parser {
 	hasMetSummary = false;
 	hasMetDescription = false;
 	hasMetTags = false;
 
-	collector: Ast = {
+	collector: Docblock = {
 		summary: {
 			value: '',
 		},
@@ -106,9 +106,9 @@ class Parser {
 		return this.collector;
 	}
 
-	getMultiLineDesc(index: number): ValueAst[] {
+	getMultiLineDesc(index: number): DocblockTagValue[] {
 		const sliceLines = this.docblockLines.slice(index);
-		const description: ValueAst[] = [];
+		const description: DocblockTagValue[] = [];
 		for (const line of sliceLines) {
 			if (this.isEmptyLine(line) || this.isTagLine(line)) {
 				break;
@@ -175,7 +175,7 @@ class Parser {
 		let isVariableCollected = false;
 		const line = this.docblockLines[lineIndex];
 
-		const tagCollector: TagAst = {
+		const tagCollector: DocblockTag = {
 			name: {
 				value: '',
 				position: {
@@ -267,7 +267,7 @@ class Parser {
 				continue;
 			}
 
-			if (this.hasType(tagCollector.name.value)) {
+			if (this.hasType(tagCollector.name.value) && isTagCollected) {
 				// Javascript type
 				if (char === '{' && isTypeCollected === false) {
 					// Set value and position
@@ -298,7 +298,16 @@ class Parser {
 				}
 
 				// PHP type
-				if (char === ' ' && isTypeCollected === false && isTagCollected === true) {
+				if (char === ' ' && isTypeCollected === false) {
+					// check for '$' to avoid collecting the variable
+					// if there is no type
+					const nextChar = line[index + 1];
+					if (nextChar === undefined || nextChar === '$') {
+						isTypeCollected = true;
+
+						continue;
+					}
+
 					tagCollector.type.value += this.consumeUntil(line.slice(index + 1), ' ');
 					const typeLength = tagCollector.type.value.length;
 					index += typeLength;
@@ -319,6 +328,8 @@ class Parser {
 					isTypeCollected = true;
 					continue;
 				}
+
+				isTypeCollected = true;
 			}
 
 			// PHP variable
@@ -449,3 +460,4 @@ class Parser {
 }
 
 export default Parser;
+export { type DocblockTagValue, type Docblock, type DocblockTag } from './types';

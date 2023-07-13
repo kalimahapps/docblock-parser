@@ -1,4 +1,4 @@
-type AstPosition = {
+type DocblockPosition = {
 	start: {
 		line: number;
 		column: number;
@@ -11,31 +11,31 @@ type AstPosition = {
 	};
 };
 
-type ValueAst = {
+type DocblockTagValue = {
 	value: string;
-	position: AstPosition;
+	position: DocblockPosition;
 };
 
-type TagAst = {
-	name: ValueAst;
-	description: ValueAst[];
-	type: ValueAst;
-	variable: ValueAst;
-	position: AstPosition;
+type DocblockTag = {
+	name: DocblockTagValue;
+	description: DocblockTagValue[];
+	type: DocblockTagValue;
+	variable: DocblockTagValue;
+	position: DocblockPosition;
 };
 
-type Ast = {
+type Docblock = {
 	summary: {
 		value: string;
-		position?: AstPosition;
+		position?: DocblockPosition;
 	};
-	description: ValueAst[];
-	tags: TagAst[];
+	description: DocblockTagValue[];
+	tags: DocblockTag[];
 };
 
 export type {
-	AstPosition,
-	ValueAst,
-	TagAst,
-	Ast
+	DocblockPosition,
+	Docblock,
+	DocblockTag,
+	DocblockTagValue
 };
