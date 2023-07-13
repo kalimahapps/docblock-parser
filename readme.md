@@ -1,6 +1,6 @@
 <p align="center">
 
-<h1 align="center">Dockblock</h1>
+<h1 align="center">Dockblock Parser</h1>
 
 </p>
 
@@ -12,11 +12,11 @@ Line based docblock parser
 <a target="_blank" href="https://www.npmjs.com/package/@kalimahapps/eslint-config">
   <img src="https://img.shields.io/badge/ESLint%20Config-kalimahapps-blue">
 </a>
-<a target="_blank" href="https://www.npmjs.com/package/@kalimahapps/docblock">
-  <img src="https://img.shields.io/npm/v/@kalimahapps/docblock.svg">
+<a target="_blank" href="https://www.npmjs.com/package/@kalimahapps/docblock-parser">
+  <img src="https://img.shields.io/npm/v/@kalimahapps/docblock-parser.svg">
 </a>
-<a target="_blank" href="https://www.npmjs.com/package/@kalimahapps/docblock">
-  <img src="https://img.shields.io/npm/dt/@kalimahapps/docblock.svg">
+<a target="_blank" href="https://www.npmjs.com/package/@kalimahapps/docblock-parser">
+  <img src="https://img.shields.io/npm/dt/@kalimahapps/docblock-parser.svg">
 </a>
 <img src="https://img.shields.io/badge/vue-3-%2342b883">
 </p>
