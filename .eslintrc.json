@@ -5,7 +5,7 @@
 	"rules": {
 		"complexity": [
 			"warn",
-			23
+			20
 		],
 		"max-depth": [
 			"warn",
