@@ -41,7 +41,7 @@ describe('Ensure data is correct', () => {
 		});
 	});
 
-	test('Ensure summar value has correct value and length', () => {
+	test('Ensure summary value has correct value and length', () => {
 		expect(summary.value.length).toBe(24);
 		expect(summary.value).toBe('Summary for this method.');
 	});

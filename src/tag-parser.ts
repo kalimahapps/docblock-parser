@@ -244,7 +244,7 @@ class TagParser {
 		}
 
 		const startColumn = this.loopIndex + descriptionIndex;
-		const endColumn = startColumn + description.length;
+		const endColumn = startColumn + (description.length - descriptionIndex);
 
 		// Add the first line of the description
 		const position = adjustPosition({
@@ -280,27 +280,26 @@ class TagParser {
 	 */
 	collectDescriptor() {
 		const line = this.docblockLines[this.lineIndex];
-		const char = line[this.loopIndex];
 
-		this.tagCollector.descriptor.value += char;
-		this.tagCollector.descriptor.value += this.consumeUntil(line.slice(this.loopIndex + 1), ' ');
+		const startColumn = this.loopIndex;
+		this.tagCollector.descriptor.value = this.consumeUntil(line.slice(startColumn), ' ');
 
 		const versionLength = this.tagCollector.descriptor.value.length;
 
 		this.tagCollector.descriptor.position = adjustPosition({
 			start: {
 				line: this.lineIndex,
-				column: this.loopIndex,
+				column: startColumn,
 				offset: getOffsetFromLineAndColumn(
-					this.lineIndex, this.loopIndex, this.docblockLines, this.lineBreakChar
+					this.lineIndex, startColumn, this.docblockLines, this.lineBreakChar
 				),
 			},
 			end: {
 				line: this.lineIndex,
-				column: this.loopIndex + versionLength,
+				column: startColumn + versionLength,
 				offset: getOffsetFromLineAndColumn(
 					this.lineIndex,
-					this.loopIndex + versionLength,
+					startColumn + versionLength,
 					this.docblockLines,
 					this.lineBreakChar
 				),
@@ -319,28 +318,26 @@ class TagParser {
 	 */
 	collectPhpVariable() {
 		const line = this.docblockLines[this.lineIndex];
-		const char = line[this.loopIndex];
 
-		this.tagCollector.descriptor.value += char;
-		this.tagCollector.descriptor.value += this.consumeUntil(line.slice(this.loopIndex + 1), ' ');
+		const startColumn = this.loopIndex;
+		this.tagCollector.descriptor.value = this.consumeUntil(line.slice(startColumn), ' ');
 
 		const variableLength = this.tagCollector.descriptor.value.length;
-		this.loopIndex += variableLength;
 
 		this.tagCollector.descriptor.position = adjustPosition({
 			start: {
 				line: this.lineIndex,
-				column: this.loopIndex,
+				column: startColumn,
 				offset: getOffsetFromLineAndColumn(
-					this.lineIndex, this.loopIndex, this.docblockLines, this.lineBreakChar
+					this.lineIndex, startColumn, this.docblockLines, this.lineBreakChar
 				),
 			},
 			end: {
 				line: this.lineIndex,
-				column: this.loopIndex + variableLength,
+				column: startColumn + variableLength,
 				offset: getOffsetFromLineAndColumn(
 					this.lineIndex,
-					this.loopIndex + variableLength,
+					startColumn + variableLength,
 					this.docblockLines,
 					this.lineBreakChar
 				),
@@ -348,6 +345,7 @@ class TagParser {
 		}, this.offset);
 
 		this.isDescriptorCollected = true;
+		this.loopIndex = startColumn + variableLength;
 	}
 
 	/**
@@ -359,23 +357,24 @@ class TagParser {
 	collectPhpType() {
 		const line = this.docblockLines[this.lineIndex];
 
-		this.tagCollector.type.value += this.consumeUntil(line.slice(this.loopIndex + 1), ' ');
+		const startColumn = this.loopIndex + 1;
+		this.tagCollector.type.value += this.consumeUntil(line.slice(startColumn), ' ');
 		const typeLength = this.tagCollector.type.value.length;
 
 		this.tagCollector.type.position = adjustPosition({
 			start: {
 				line: this.lineIndex,
-				column: this.loopIndex,
+				column: startColumn,
 				offset: getOffsetFromLineAndColumn(
 					this.lineIndex, this.loopIndex, this.docblockLines, this.lineBreakChar
 				),
 			},
 			end: {
 				line: this.lineIndex,
-				column: this.loopIndex + typeLength,
+				column: startColumn + typeLength,
 				offset: getOffsetFromLineAndColumn(
 					this.lineIndex,
-					this.loopIndex + typeLength,
+					startColumn + typeLength,
 					this.docblockLines,
 					this.lineBreakChar
 				),

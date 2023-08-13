@@ -47,11 +47,11 @@ const getLineBreakChar = function (string: string): 'LF' | 'CRLF' {
 /**
  * Calculate offset based on the line and column
  *
- * @param  {number}   lineIndex     Line index to calculate
- * @param  {number}   column        Column index to calculate
- * @param  {string[]} docblockLines Docblock lines
- * @param             lineBreakChar
- * @return {number}                 Offset
+ * @param  {number}        lineIndex     Line index to calculate
+ * @param  {number}        column        Column index to calculate
+ * @param  {string[]}      docblockLines Docblock lines
+ * @param  {LineBreakChar} lineBreakChar The linebreak character (LF or CRLF)
+ * @return {number}                      Offset
  */
 const getOffsetFromLineAndColumn = function (
 	lineIndex: number,
