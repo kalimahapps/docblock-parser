@@ -366,7 +366,7 @@ class TagParser {
 				line: this.lineIndex,
 				column: startColumn,
 				offset: getOffsetFromLineAndColumn(
-					this.lineIndex, this.loopIndex, this.docblockLines, this.lineBreakChar
+					this.lineIndex, startColumn, this.docblockLines, this.lineBreakChar
 				),
 			},
 			end: {

@@ -155,6 +155,21 @@ describe('Ensure data is correct', () => {
 	});
 
 	test('Ensure first `@param` tag type position is correct', () => {
+		expect(tags[1].type.position).toMatchObject({
+			start: {
+				line: 8,
+				column: 10,
+				offset: 145,
+			},
+			end: {
+				line: 8,
+				column: 16,
+				offset: 151,
+			},
+		});
+	});
+
+	test('Ensure first `@param` tag variable position is correct', () => {
 		expect(tags[1].descriptor.position).toMatchObject({
 			start: {
 				line: 8,

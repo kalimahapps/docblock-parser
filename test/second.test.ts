@@ -73,7 +73,7 @@ describe('Ensure data is correct', () => {
 		expect(description[0].value).toBe('Single line description.');
 	});
 
-	test('Ensure first  `@since` tag position is correct', () => {
+	test('Ensure first `@since` tag position is correct', () => {
 		expect(tags[0].position).toMatchObject({
 			start: {
 				line: 5,
@@ -198,6 +198,21 @@ describe('Ensure data is correct', () => {
 		expect(tags[4].type.value).toBe('string|int');
 	});
 
+	test('Ensure third `@param` type position is correct', () => {
+		expect(tags[4].type.position).toMatchObject({
+			start: {
+				line: 12,
+				column: 9,
+				offset: 340,
+			},
+			end: {
+				line: 12,
+				column: 19,
+				offset: 350,
+			},
+		});
+	});
+
 	test('Ensure third `@param` descriptor is correct', () => {
 		expect(tags[4].descriptor.value).toBe('$var');
 	});
@@ -223,6 +238,22 @@ describe('Ensure data is correct', () => {
 
 	test('Ensure fourth `@param` tag type is correct', () => {
 		expect(tags[5].type.value).toBe('{number}');
+	});
+
+	test('Ensure fourth `@param` type position is correct', () => {
+		console.log(tags[5].type);
+		expect(tags[5].type.position).toMatchObject({
+			start: {
+				line: 13,
+				column: 9,
+				offset: 395,
+			},
+			end: {
+				line: 13,
+				column: 17,
+				offset: 403,
+			},
+		});
 	});
 
 	test('Ensure fourth `@param` descriptor is correct', () => {
