@@ -356,25 +356,34 @@ class TagParser {
 	 */
 	collectPhpType() {
 		const line = this.docblockLines[this.lineIndex];
+		let typeIndex = this.loopIndex + 1;
+		const sliceLine = line.slice(typeIndex);
 
-		const startColumn = this.loopIndex + 1;
-		this.tagCollector.type.value += this.consumeUntil(line.slice(startColumn), ' ');
+		// Ignore leading whitespace
+		const leadingWhitespace = sliceLine.match(/^\s+/u);
+		if (leadingWhitespace !== null) {
+			typeIndex += leadingWhitespace[0].length;
+			this.loopIndex += leadingWhitespace[0].length;
+		}
+
+		// const startColumn = this.loopIndex + 1;
+		this.tagCollector.type.value += this.consumeUntil(line.slice(typeIndex), ' ');
 		const typeLength = this.tagCollector.type.value.length;
 
 		this.tagCollector.type.position = adjustPosition({
 			start: {
 				line: this.lineIndex,
-				column: startColumn,
+				column: typeIndex,
 				offset: getOffsetFromLineAndColumn(
-					this.lineIndex, startColumn, this.docblockLines, this.lineBreakChar
+					this.lineIndex, typeIndex, this.docblockLines, this.lineBreakChar
 				),
 			},
 			end: {
 				line: this.lineIndex,
-				column: startColumn + typeLength,
+				column: typeIndex + typeLength,
 				offset: getOffsetFromLineAndColumn(
 					this.lineIndex,
-					startColumn + typeLength,
+					typeIndex + typeLength,
 					this.docblockLines,
 					this.lineBreakChar
 				),

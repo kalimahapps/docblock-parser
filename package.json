@@ -2,7 +2,7 @@
   "name": "@kalimahapps/docblock-parser",
   "description": "Line-based docblock parser",
   "author": "khr2003",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "homepage": "https://github.com/kalimahapps/docblock-parser",
   "repository": {
     "type": "git",

@@ -241,7 +241,6 @@ describe('Ensure data is correct', () => {
 	});
 
 	test('Ensure fourth `@param` type position is correct', () => {
-		console.log(tags[5].type);
 		expect(tags[5].type.position).toMatchObject({
 			start: {
 				line: 13,
